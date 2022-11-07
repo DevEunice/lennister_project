@@ -4,7 +4,6 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const db = require("./db");
-const indexRouter = require("./routes/index");
 const feesRouter = require("./routes/fees");
 
 db.sync()
