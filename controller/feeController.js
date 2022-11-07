@@ -1,6 +1,5 @@
 const Fees = require("../model/feeConfigurationSpecModel");
 
-
 const result = {};
 const feeConfiguration = async (req, res) => {
   try {
@@ -20,13 +19,11 @@ const feeConfiguration = async (req, res) => {
       return obj;
     });
 
-    
     const fsc = await Fees.bulkCreate(newData);
     res.status(200).json({
       status: "ok",
     });
   } catch (error) {
-    console.log(error);
     res.status(400).json({
       status: "failed",
     });
@@ -88,18 +85,14 @@ const feeComputation = async (req, res) => {
 
       if (fscArr.feeType === "PERC") {
         total = (fscArr.feeValue / 100) * amount;
-        console.log(total, "PERC");
         return total;
       } else if (fscArr.feeType === "FLAT") {
         total = fscArr.feeValue;
-        console.log(total, "FLAT");
         return total;
       } else if (fscArr.feeType === "FLAT_PERC") {
         let flat = Number(fscArr.feeValue.split(":")[0]);
         let perc = Number(fscArr.feeValue.split(":")[1]);
         total = flat + (perc / 100) * amount;
-        console.log(total, "FLAT_PERC");
-
         return total;
       }
     }
